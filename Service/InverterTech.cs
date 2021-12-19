@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Electronics_Store_MS.Service
 {
-    class InverterTech
+    public class InverterTech : Service
     {
+        public override string AddServiceName()
+        {
+            if (IsAdded == true)
+                return "Công nghệ Inverter";
+            else return "Không";
+        }
     }
 }
