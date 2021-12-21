@@ -7,10 +7,8 @@ namespace Electronics_Store_MS.Product.Fan
     using Electronics_Store_MS.UIController;
     class Battery : Fan
     {
-        private bool isChecked;
         private int batteryCapacity;
 
-        public bool IsChecked { get => isChecked; set => isChecked = value; }
         public int BatteryCapacity { get => batteryCapacity; }
 
         public override void AddToInvoice()

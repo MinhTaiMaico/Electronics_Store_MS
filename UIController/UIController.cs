@@ -6,6 +6,7 @@ using System.Threading;
 namespace Electronics_Store_MS.UIController
 {
     using Electronics_Store_MS.Menu;
+    using Electronics_Store_MS.Service;
 
     class UIController
     {
@@ -110,6 +111,44 @@ namespace Electronics_Store_MS.UIController
             {
                 BackToMenu("Hết lượt nhập, quay lại trang chủ trong giây lát.", 2000);
             }
+        }
+
+        public static void GetExtraServices(Service service, ref List<Service> services)
+        {
+            int choice = -1;
+
+            EnterNumber($"Thêm {service.Name} ? (1-Có. 0-Không)", ref choice);
+            if (EnterIOChoice(choice))
+            {
+                service.IsAdded = true;
+                services.Add(service);
+            }
+            else
+            {
+                GetExtraServices(service, ref services);
+            }
+        }
+        public static bool EnterIOChoice(int choice)
+        {
+            bool isChecked = false; ;
+            int limitOfEntries = 5;
+            for (int i = 0; i < limitOfEntries; i++)
+            {
+                if (choice != 1 && choice != 0)
+                {
+                    ShowAlert("Nhập sai định dạng. Chỉ có 2 lựa chọn (0-1).", i, limitOfEntries);
+                }
+                else
+                {
+                    if (choice == 1)
+                    {
+                        isChecked = true;
+                        break;
+                    }
+                    else isChecked = false;
+                }
+            }
+            return isChecked;
         }
     }
 }

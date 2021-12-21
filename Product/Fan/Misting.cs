@@ -8,10 +8,8 @@ namespace Electronics_Store_MS.Product.Fan
 
     class Misting : Fan
     {
-        private bool isChecked;
         private int waterCapacity;
 
-        public bool IsChecked { get => isChecked; set => isChecked = value; }
         public int WaterCapacity { get => waterCapacity; set => waterCapacity = value; }
 
         public override void AddToInvoice()
