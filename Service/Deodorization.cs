@@ -8,8 +8,9 @@ namespace Electronics_Store_MS.Service
     {
         public override string AddServiceName()
         {
+            Name = "Công nghệ Kháng khuẩn";
             if (IsAdded == true)
-                return "Công nghệ Kháng khuẩn";
+                return "Có";
             else return "Không";
         }
     }

@@ -10,9 +10,9 @@ namespace Electronics_Store_MS.Service
         private int fee = 500;
         private bool isAdded = false;
 
-        protected string Name { get => name; set => name = value; }
-        protected int Fee { get => fee; }
-        protected bool IsAdded { get => isAdded; set => isAdded = value; }
+        public string Name { get => name; set => name = value; }
+        public int Fee { get => fee; }
+        public bool IsAdded { get => isAdded; set => isAdded = value; }
 
         public abstract string AddServiceName();
     }

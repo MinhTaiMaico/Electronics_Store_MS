@@ -30,12 +30,14 @@ namespace Electronics_Store_MS
                         Misting misting = new Misting();
                         misting.AddToInvoice();
                         misting.ExportInvoice();
+                        Console.ReadKey();
                         isContinue = false;
                         break;
                     case 3:
                         Battery battery = new Battery();
                         battery.AddToInvoice();
                         battery.ExportInvoice();
+                        Console.ReadKey();
                         isContinue = false;
                         break;
                     default:
