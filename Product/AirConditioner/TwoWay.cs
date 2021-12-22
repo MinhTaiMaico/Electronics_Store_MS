@@ -33,7 +33,14 @@ namespace Electronics_Store_MS.Product.AirConditioner
             Console.Write("\tCông nghệ bổ sung: ");
             for (int i = 0; i < extraServices.Count; i++)
             {
-                Console.WriteLine("{0}", extraServices[i].Name);
+                if (i == 0)
+                {
+                    Console.WriteLine("{0}", extraServices[i].Name);
+                }
+                else
+                {
+                    Console.WriteLine("\t\t\t   {0}", extraServices[i].Name);
+                }
             }
             Console.WriteLine("\tGiá: {0}", GetPrice(ref price));
         }

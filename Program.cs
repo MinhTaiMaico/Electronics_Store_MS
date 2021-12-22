@@ -1,8 +1,4 @@
 ﻿using System;
-using Electronics_Store_MS.Product.Fan;
-using Electronics_Store_MS.Product.AirConditioner;
-using Electronics_Store_MS.Service;
-using Electronics_Store_MS.UIController;
 
 namespace Electronics_Store_MS
 {
@@ -15,76 +11,28 @@ namespace Electronics_Store_MS
 
             int choice = 0;
             bool isContinue = true;
-
-            
-
+            Menu.Menu.Show();
             do
             {
-                Console.WriteLine("Chọn loại điều hòa: 1.Một chiều - 2.hai chiều");
-                UIController.UIController.EnterNumber("Bạn chọn loại số: ", ref choice);
+                UIController.UIController.EnterNumber("\tLựa chọn của bạn là: ", ref choice);
 
                 switch (choice)
                 {
                     case 1:
-                        OneWay one = new OneWay();
-                        one.AddToInvoice();
-                        one.ExportInvoice();
-                        isContinue = false;
-                        Console.ReadKey();
+                        Menu.Menu.ChooseOneProduct(choice, isContinue);
                         break;
                     case 2:
-                        TwoWay misting = new TwoWay();
-                        misting.AddToInvoice();
-                        misting.ExportInvoice();
-                        Console.ReadKey();
-                        isContinue = false;
                         break;
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Chỉ nhập từ 1 và 2");
-                        Console.ResetColor();
+                    case 3:
+                        break;
+                    case 4:
+                        Menu.Menu.CloseApps(choice, isContinue);
                         break;
                 }
-            }
-            while (isContinue);
 
-
-            //do
-            //{
-            //    Console.WriteLine("Chọn loại quạt: 1.Quạt đứng - 2.Quạt phun sướng - 3.Quạt sạc điện");
-            //    UIController.UIController.EnterNumber("Bạn chọn loại số: ", ref choice);
-
-            //    switch (choice)
-            //    {
-            //        case 1:
-            //            Pedestal pedestal = new Pedestal();
-            //            pedestal.AddToInvoice();
-            //            pedestal.ExportInvoice();
-            //            isContinue = false;
-            //            Console.ReadKey();
-            //            break;
-            //        case 2:
-            //            Misting misting = new Misting();
-            //            misting.AddToInvoice();
-            //            misting.ExportInvoice();
-            //            Console.ReadKey();
-            //            isContinue = false;
-            //            break;
-            //        case 3:
-            //            Battery battery = new Battery();
-            //            battery.AddToInvoice();
-            //            battery.ExportInvoice();
-            //            Console.ReadKey();
-            //            isContinue = false;
-            //            break;
-            //        default:
-            //            Console.ForegroundColor = ConsoleColor.Red;
-            //            Console.WriteLine("Chỉ nhập từ 1-3");
-            //            Console.ResetColor();
-            //            break;
-            //    }
-            //}
-            //while (isContinue);
+            } while (isContinue);
         }
+
+        
     }
 }

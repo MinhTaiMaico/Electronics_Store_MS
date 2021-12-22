@@ -35,6 +35,19 @@ namespace Electronics_Store_MS.UIController
                 if (NumericCheck(information, i, limitOfEntries, ref number)) { break; }
             }
         }
+        public static void EnterPhoneNumber(string label, ref string number)
+        {
+            string information;
+
+            int limitOfEntries = 5;
+            for (int i = 0; i < limitOfEntries; i++)
+            {
+                Console.WriteLine();
+                Console.Write(label);
+                information = Console.ReadLine();
+                if (PhoneCheck(ref information, i, limitOfEntries)) { break; }
+            }
+        }
 
         public static void PrintInformation(string label, string information)
         {
@@ -78,7 +91,15 @@ namespace Electronics_Store_MS.UIController
             else
             {
                 information = value.ToString();
-                return true;
+                if(information.Trim().Length != 10 && information.Trim().Length != 11)
+                {
+                    ShowAlert("Nhập sai định dạng, phải nhập số tự nhiên!", i, limitOfEntries);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 
@@ -117,10 +138,10 @@ namespace Electronics_Store_MS.UIController
         {
             int choice = -1;
 
-            if (EnterIOChoice(choice, service) && service.IsAdded == true)
+            if (WhatYourChoice(choice, service) && service.IsAdded == true)
                 services.Add(service);
         }
-        public static bool EnterIOChoice(int choice, Service service)
+        public static bool WhatYourChoice(int choice, Service service)
         {
             bool isChecked = false; ;
             int limitOfEntries = 5;
