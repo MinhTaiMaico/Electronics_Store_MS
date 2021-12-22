@@ -8,7 +8,7 @@ namespace Electronics_Store_MS.UIController
     using Electronics_Store_MS.Menu;
     using Electronics_Store_MS.Service;
 
-    class UIController
+    public class UIController
     {
         public static void EnterInformation(string label, ref string information)
         {
@@ -117,23 +117,16 @@ namespace Electronics_Store_MS.UIController
         {
             int choice = -1;
 
-            EnterNumber($"Thêm {service.Name} ? (1-Có. 0-Không)", ref choice);
-            if (EnterIOChoice(choice))
-            {
-                service.IsAdded = true;
+            if (EnterIOChoice(choice, service) && service.IsAdded == true)
                 services.Add(service);
-            }
-            else
-            {
-                GetExtraServices(service, ref services);
-            }
         }
-        public static bool EnterIOChoice(int choice)
+        public static bool EnterIOChoice(int choice, Service service)
         {
             bool isChecked = false; ;
             int limitOfEntries = 5;
             for (int i = 0; i < limitOfEntries; i++)
             {
+                EnterNumber($"Thêm {service.AddServiceName()} ? (1-Có. 0-Không)", ref choice);
                 if (choice != 1 && choice != 0)
                 {
                     ShowAlert("Nhập sai định dạng. Chỉ có 2 lựa chọn (0-1).", i, limitOfEntries);
@@ -142,10 +135,14 @@ namespace Electronics_Store_MS.UIController
                 {
                     if (choice == 1)
                     {
-                        isChecked = true;
-                        break;
+                        service.IsAdded = true;
                     }
-                    else isChecked = false;
+                    else 
+                    {
+                        service.IsAdded = false;
+                    }
+                    isChecked = true;
+                    break;
                 }
             }
             return isChecked;

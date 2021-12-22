@@ -8,7 +8,7 @@ namespace Electronics_Store_MS.Product.AirConditioner
     class AirConditioner : Product
     {
         private string type;
-        public List<Service> extraServices;
+        public List<Service> extraServices= new List<Service>();
 
         protected string Type { get => type; set => type = value; }
 
