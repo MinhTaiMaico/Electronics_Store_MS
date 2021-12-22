@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Electronics_Store_MS.Product.AirConditioner
 {
+    using Electronics_Store_MS.Service;
+
     class TwoWay : AirConditioner
     {
         private int initalPrice = 2000;
@@ -13,19 +15,35 @@ namespace Electronics_Store_MS.Product.AirConditioner
 
         public override void AddToInvoice()
         {
+            InverterTech inverter = new InverterTech();
+            Antibacterial antibacterial = new Antibacterial();
+            Deodorization deodorization = new Deodorization();
             base.AddToInvoice();
             Type = "Máy lạnh 2 chiều.";
+            UIController.UIController.GetExtraServices(inverter, ref extraServices);
+            UIController.UIController.GetExtraServices(antibacterial, ref extraServices);
+            UIController.UIController.GetExtraServices(deodorization, ref extraServices);
+
         }
 
         public override void ExportInvoice()
         {
             base.ExportInvoice();
             Console.WriteLine("\tLoại: {0}", Type);
+            Console.Write("\tCông nghệ bổ sung: ");
+            for (int i = 0; i < extraServices.Count; i++)
+            {
+                Console.WriteLine("{0}", extraServices[i].Name);
+            }
+            Console.WriteLine("\tGiá: {0}", GetPrice(ref price));
         }
 
         public override decimal GetPrice(ref decimal price)
         {
-            return base.GetPrice(ref price);
+            Service service = new InverterTech();
+            int fee = service.Fee;
+            price = initalPrice + extraServices.Count * fee;
+            return price;
         }
     }
 }
