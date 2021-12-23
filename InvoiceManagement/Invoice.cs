@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Electronics_Store_MS.InvoiceManagement
 {
     using Electronics_Store_MS.Customer;
+    using Electronics_Store_MS.UIController;
     
     public class Invoice
     {
@@ -19,5 +21,24 @@ namespace Electronics_Store_MS.InvoiceManagement
         public Customer Customer { get => customer; }
         public DateTime Date { get => date; }
         public decimal TotalCost { get => totalCost; }
+
+        public void EnterInformation()
+        {
+            int length = 0;
+            UIController.EnterInformation("Nhập Mã hóa đơn: ", ref iD);
+            Console.WriteLine("Nhập Thông tin khách hàng:");
+            customer.GetInformation();
+            UIController.EnterNumber("Nhập Số lượng các sản phẩm trong hóa đơn: ", ref length);
+            InvoiceDetail.EnterDetailList(ref invoiceDetails, length);
+        }
+
+        public decimal GetTotalCost()
+        {
+            var costs = from invoiceDetail in invoiceDetails
+                        select invoiceDetail.Cost;
+            totalCost = costs.Sum();
+            
+            return totalCost;
+        }
     }
 }

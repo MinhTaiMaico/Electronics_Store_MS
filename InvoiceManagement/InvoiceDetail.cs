@@ -30,6 +30,16 @@ namespace Electronics_Store_MS.InvoiceManagement
             Console.WriteLine("Thành tiền: {0}", GetCost());
         }
 
+        public static void EnterDetailList(ref List<InvoiceDetail> invoiceDetails, int listLength)
+        {
+            for (int i = 0; i < listLength; i++)
+            {
+                InvoiceDetail detail = new InvoiceDetail();
+                detail.EnterInformation();
+                invoiceDetails.Add(detail); 
+            }
+        }
+
         public decimal GetCost()
         {
             cost= quantity * product.Price;
