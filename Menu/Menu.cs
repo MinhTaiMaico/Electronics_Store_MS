@@ -36,7 +36,7 @@ namespace Electronics_Store_MS.Menu
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Chỉ nhập từ 1 và 0");
+                        Console.WriteLine("Chỉ nhập 1 và 0");
                         Console.ResetColor();
                         break;
                 }
@@ -63,7 +63,7 @@ namespace Electronics_Store_MS.Menu
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Chỉ nhập từ 1 và 2");
+                        Console.WriteLine("Chỉ nhập 1 và 2");
                         Console.ResetColor();
                         break;
                 }
@@ -113,7 +113,7 @@ namespace Electronics_Store_MS.Menu
         {
             do
             {
-                Console.WriteLine("Chọn loại điều hòa: 1.Một chiều - 2.hai chiều");
+                Console.WriteLine("Chọn loại điều hòa: 1.Một chiều - 2.Hai chiều");
                 UIController.UIController.EnterNumber("Bạn chọn loại số: ", ref choice);
 
                 switch (choice)
@@ -134,7 +134,7 @@ namespace Electronics_Store_MS.Menu
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Chỉ nhập từ 1 và 2");
+                        Console.WriteLine("Chỉ nhập 1 và 2");
                         Console.ResetColor();
                         break;
                 }

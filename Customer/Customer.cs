@@ -18,7 +18,6 @@ namespace Electronics_Store_MS.Customer
 
         public void GetInformation()
         {
-            Console.WriteLine("Thông tin khách hàng: ");
             UIController.UIController.EnterInformation("Nhập Mã khách hàng: ", ref iD);
             UIController.UIController.EnterInformation("Nhập Tên khách hàng: ", ref name);
             UIController.UIController.EnterInformation("Nhập Địa chỉ khách hàng: ", ref address);
