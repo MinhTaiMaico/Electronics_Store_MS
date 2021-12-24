@@ -24,8 +24,10 @@ namespace Electronics_Store_MS.InvoiceManagement
 
         public void EnterInformation()
         {
+            customer = new Customer();
             int length = 0;
             UIController.EnterInformation("Nhập Mã hóa đơn: ", ref iD);
+            UIController.EnterDate("Nhập Ngày lập hóa đơn: ", ref date);
             Console.WriteLine("Nhập Thông tin khách hàng:");
             customer.GetInformation();
             UIController.EnterNumber("Nhập Số lượng các sản phẩm trong hóa đơn: ", ref length);

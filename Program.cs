@@ -4,7 +4,7 @@ namespace Electronics_Store_MS
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = System.Text.Encoding.UTF8;
@@ -19,7 +19,9 @@ namespace Electronics_Store_MS
                 switch (choice)
                 {
                     case 1:
-                        Menu.Menu.ChooseOneProduct(choice, isContinue);
+                        //Menu.Menu.ChooseOneProduct(choice, isContinue);
+                        InvoiceManagement.Invoice invoice = new InvoiceManagement.Invoice();
+                        invoice.EnterInformation();
                         break;
                     case 2:
                         break;
@@ -31,6 +33,7 @@ namespace Electronics_Store_MS
                 }
 
             } while (isContinue);
+            Console.ReadKey();
         }
 
         

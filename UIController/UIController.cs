@@ -10,9 +10,10 @@ namespace Electronics_Store_MS.UIController
 
     public class UIController
     {
+        static int limitOfEntries = 5;
+
         public static void EnterInformation(string label, ref string information)
         {
-            int limitOfEntries = 5;
             for (int i = 0; i < limitOfEntries; i++)
             {
                 Console.WriteLine();
@@ -37,7 +38,6 @@ namespace Electronics_Store_MS.UIController
         {
             string information;
 
-            int limitOfEntries = 5;
             for (int i = 0; i < limitOfEntries; i++)
             {
                 Console.WriteLine();
@@ -67,7 +67,6 @@ namespace Electronics_Store_MS.UIController
 
         public static void EnterPhoneNumber(string label, ref string phoneNumber)
         {
-            int limitOfEntries = 5;
             for (int i = 0; i < limitOfEntries; i++)
             {
                 Console.WriteLine();
@@ -117,12 +116,13 @@ namespace Electronics_Store_MS.UIController
 
         public static void BackToMenu(String message, int miliseconds)
         {
+            string[] args= null;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             Console.ResetColor();
             Thread.Sleep(miliseconds);
             Console.Clear();
-            Menu.Show();
+            Program.Main(args);
             Console.ReadLine();
         }
 
@@ -154,6 +154,156 @@ namespace Electronics_Store_MS.UIController
                 }
             }
             return isChecked;
+        }
+
+        public static void EnterDate(string label,ref DateTime dateTime)
+        {
+            int year = 0, month = 0, day = 0;
+            Console.WriteLine(label);
+            EnterYear("Nhập Năm: ", ref year);
+            EnterMonth("Nhập Tháng: ", ref month);
+            for (int i = 0; i < limitOfEntries; i++)
+            {
+                Console.WriteLine();
+                Console.Write("Nhập ngày: ");
+                string information = Console.ReadLine();
+                if (NumericCheck(information, i, limitOfEntries, ref day))
+                {
+                    if (IsDay(day, month, year, i, limitOfEntries)) { break; }
+                }
+            }
+
+            dateTime = new DateTime(year, month, day);
+        }
+
+        public static bool IsDay(int day,int month, int year, int numberOfEntries, int limitOfEntries)
+        {
+            bool isTrue = true;
+            if (day < 32 && day > 0)
+            {
+                if (DateTime.IsLeapYear(year) && month == 2)
+                {
+                    if (day > 29)
+                    {
+                        ShowAlert("Sai định dạng. Ngày trong tháng 2 của năm nhuận phải từ 1-29", numberOfEntries, limitOfEntries);
+                        isTrue = false;
+                    }
+                    else isTrue = true;
+                }
+                else
+                {
+                    if (month == 4 || month == 6 || month == 9 || month == 11)
+                    {
+                        if (day > 30)
+                        {
+                            ShowAlert("Sai định dạng. Ngày trong tháng này phải từ 1-30", numberOfEntries, limitOfEntries);
+                            isTrue = false;
+                        }
+                        else isTrue = true;
+                    }
+                    else if(month == 1 || month == 3 || month == 5 || month == 7|| month == 8 || month == 10 || month == 12)
+                    {
+                        if (day > 31)
+                        {
+                            ShowAlert("Sai định dạng. Ngày trong tháng này phải từ 1-31", numberOfEntries, limitOfEntries);
+                            isTrue = false;
+                        }
+                        else isTrue = true;
+                    }
+                    else if (month == 2)
+                    {
+                        if (day > 28)
+                        {
+                            ShowAlert("Sai định dạng. Ngày trong tháng này phải từ 1-28", numberOfEntries, limitOfEntries);
+                            isTrue = false;
+                        }
+                        else isTrue = true;
+                    }
+                }
+            }
+            else
+            {
+                ShowAlert("Sai định dạng. Ngày trong tháng phải từ 1 - 31", numberOfEntries, limitOfEntries);
+                isTrue = false;
+            }
+
+            return isTrue;
+        }
+
+        public static void EnterMonth(string label, ref int month)
+        {
+            string information;
+
+            for (int i = 0; i < limitOfEntries; i++)
+            {
+                Console.WriteLine();
+                Console.Write(label);
+                information = Console.ReadLine();
+                if (NumericCheck(information, i, limitOfEntries, ref month))
+                {
+                    if (IsMonth(month, i, limitOfEntries)) { break; }
+                }
+            }
+        }
+
+        public static bool IsMonth(int month, int numberOfEnties, int limitOfEntries)
+        {
+            bool isTrue;
+
+            bool isGreaterThan12 = month > 12;
+            bool isSmallerThan0 = month < 0;
+            if (isGreaterThan12)
+            {
+                ShowAlert("Sai định dạng. Tháng bạn nhập lớn hơn 12 hiện tại.", numberOfEnties, limitOfEntries);
+                isTrue = false;
+            }
+            else if (isSmallerThan0)
+            {
+                ShowAlert("Sai định dạng. Tháng bạn nhập nhỏ hơn 0.", numberOfEnties, limitOfEntries);
+                isTrue = false;
+            }
+            else
+                isTrue = true;
+
+            return isTrue;
+        }
+
+        public static void EnterYear(string label, ref int year)
+        {
+            string information;
+
+            for (int i = 0; i < limitOfEntries; i++)
+            {
+                Console.WriteLine();
+                Console.Write(label);
+                information = Console.ReadLine();
+                if (NumericCheck(information, i, limitOfEntries, ref year))
+                {
+                    if (IsYear(year, i, limitOfEntries)) { break; }
+                }
+            }
+        }
+
+        public static bool IsYear(int year, int numberOfEnties, int limitOfEntries)
+        {
+            bool isTrue;
+
+            bool isGreaterThanNow = year > DateTime.Now.Year;
+            bool isSmallerThan20 = year < DateTime.Now.AddYears(-20).Year;
+            if (isGreaterThanNow)
+            {
+                ShowAlert("Sai định dạng. Năm bạn nhập lớn hơn năm hiện tại.", numberOfEnties, limitOfEntries);
+                isTrue = false; 
+            }
+            else if (isSmallerThan20)
+            {
+                ShowAlert("Sai định dạng. Năm bạn nhập vượt quá thời hạn (20 năm trở lại đây).", numberOfEnties, limitOfEntries);
+                isTrue = false;
+            }
+            else
+                isTrue = true;
+            
+            return isTrue;
         }
     }
 }
