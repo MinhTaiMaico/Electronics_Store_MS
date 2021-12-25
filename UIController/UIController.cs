@@ -78,10 +78,9 @@ namespace Electronics_Store_MS.UIController
 
         public static bool PhoneCheck(ref string information, int numberOfEntries, int limitOfEntries)
         {
-            uint value;
+            long value;
 
-            bool isChecked = uint.TryParse(information, out value);
-
+            bool isChecked = long.TryParse(information, out value);
             if (isChecked != true)
             {
                 ShowAlert("Nhập sai định dạng, phải nhập số tự nhiên.", numberOfEntries, limitOfEntries);
@@ -89,14 +88,12 @@ namespace Electronics_Store_MS.UIController
             }
             else
             {
-                information = value.ToString();
-                if (information.Trim().Length != 10 && information.Trim().Length != 11)
+                if (information.Length == 10 || information.Length == 11) { return true; }
+                else
                 {
                     ShowAlert("Nhập sai định dạng. SĐT phải có độ dài 10 hoặc 11 kí tự.", numberOfEntries, limitOfEntries);
                     return false;
                 }
-                else 
-                    return true;
             }
         }
 
@@ -292,7 +289,7 @@ namespace Electronics_Store_MS.UIController
             bool isSmallerThan20 = year < DateTime.Now.AddYears(-20).Year;
             if (isGreaterThanNow)
             {
-                ShowAlert("Sai định dạng. Năm bạn nhập lớn hơn năm hiện tại.", numberOfEnties, limitOfEntries);
+                ShowAlert($"Sai định dạng. Năm bạn nhập lớn hơn năm {DateTime.Now.Year}.", numberOfEnties, limitOfEntries);
                 isTrue = false; 
             }
             else if (isSmallerThan20)
