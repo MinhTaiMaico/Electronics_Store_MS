@@ -25,7 +25,6 @@ namespace Electronics_Store_MS.Product
         }
         public virtual void ExportInvoice()
         {
-            Console.Clear();
             Console.WriteLine("\tMã SP: {0}", ID);
             Console.WriteLine("\tTên SP: {0}", Name);
             Console.WriteLine("\tThuộc nhà SX: {0}", Provider);

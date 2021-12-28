@@ -46,7 +46,7 @@ namespace Electronics_Store_MS.Menu
         {
             Environment.Exit(0);
         }
-        public static void ChooseOneProduct(int choice, bool isContinue, Product.Product product)
+        public static void ChooseOneProduct(int choice, bool isContinue, ref Product.Product product)
         {
             do
             {
@@ -56,11 +56,11 @@ namespace Electronics_Store_MS.Menu
                 switch (choice)
                 {
                     case 1:
-                        ChooseOneFan(choice, isContinue, product);
+                        ChooseOneFan(choice, isContinue, ref product);
                         isContinue = false;
                         break;
                     case 2:
-                        ChooseOneAirConditioner(choice, isContinue, product);
+                        ChooseOneAirConditioner(choice, isContinue,ref product);
                         isContinue = false;
                         break;
                     default:
@@ -72,7 +72,7 @@ namespace Electronics_Store_MS.Menu
             } while (isContinue);
         }
 
-        public static void ChooseOneFan(int choice, bool isContinue, Product.Product product)
+        public static void ChooseOneFan(int choice, bool isContinue, ref Product.Product product)
         {
             do
             {
@@ -85,18 +85,22 @@ namespace Electronics_Store_MS.Menu
                         Pedestal pedestal = new Pedestal();
                         pedestal.AddToInvoice();
                         product = pedestal;
+                        product.ExportInvoice();
                         isContinue = false;
                         break;
                     case 2:
                         Misting misting = new Misting();
                         misting.AddToInvoice();
                         product = misting;
+                        product.ExportInvoice();
+
                         isContinue = false;
                         break;
                     case 3:
                         Battery battery = new Battery();
                         battery.AddToInvoice();
                         product = battery;
+                        product.ExportInvoice();
                         isContinue = false;
                         break;
                     default:
@@ -108,7 +112,7 @@ namespace Electronics_Store_MS.Menu
             } while (isContinue);
         }
 
-        public static void ChooseOneAirConditioner(int choice, bool isContinue, Product.Product product)
+        public static void ChooseOneAirConditioner(int choice, bool isContinue,ref Product.Product product)
         {
             do
             {
@@ -121,12 +125,14 @@ namespace Electronics_Store_MS.Menu
                         OneWay one = new OneWay();
                         one.AddToInvoice();
                         product = one;
+                        product.ExportInvoice();
                         isContinue = false;
                         break;
                     case 2:
                         TwoWay two = new TwoWay();
                         two.AddToInvoice();
                         product = two;
+                        product.ExportInvoice();
                         isContinue = false;
                         break;
                     default:

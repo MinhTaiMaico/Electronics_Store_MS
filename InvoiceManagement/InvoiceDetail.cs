@@ -21,7 +21,7 @@ namespace Electronics_Store_MS.InvoiceManagement
         {
             int choice = 0;
             bool isContinue = true;
-            Menu.Menu.ChooseOneProduct(choice, isContinue, product);
+            Menu.Menu.ChooseOneProduct(choice, isContinue, ref product);
             UIController.EnterNumber("Nhập Số lượng: ", ref quantity);
         }
 

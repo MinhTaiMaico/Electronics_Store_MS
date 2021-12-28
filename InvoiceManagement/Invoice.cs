@@ -35,6 +35,8 @@ namespace Electronics_Store_MS.InvoiceManagement
 
         public void ExportInformation()
         {
+            Console.Clear();
+            Console.WriteLine("THÔNG TIN HÓA ĐƠN");
             Console.WriteLine("Mã hóa đơn: {0}",ID);
             Console.WriteLine("Ngày lập hóa đơn: {0}", Date);
             customer.ExportInformation();
