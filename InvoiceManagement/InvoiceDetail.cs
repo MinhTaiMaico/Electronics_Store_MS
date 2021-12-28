@@ -19,7 +19,9 @@ namespace Electronics_Store_MS.InvoiceManagement
 
         public void EnterInformation()
         {
-            product.AddToInvoice();
+            int choice = 0;
+            bool isContinue = true;
+            Menu.Menu.ChooseOneProduct(choice, isContinue, product);
             UIController.EnterNumber("Nhập Số lượng: ", ref quantity);
         }
 
@@ -34,9 +36,18 @@ namespace Electronics_Store_MS.InvoiceManagement
         {
             for (int i = 0; i < listLength; i++)
             {
+                Console.WriteLine("Nhập Thông tin sản phẩm thứ {0}:", i + 1);
                 InvoiceDetail detail = new InvoiceDetail();
                 detail.EnterInformation();
                 invoiceDetails.Add(detail); 
+            }
+        }
+
+        public static void ExportDetailList(ref List<InvoiceDetail> invoiceDetails)
+        {
+            foreach(InvoiceDetail detail in invoiceDetails)
+            {
+                detail.ExportInformation();
             }
         }
 

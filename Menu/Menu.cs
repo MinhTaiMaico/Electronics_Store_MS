@@ -46,7 +46,7 @@ namespace Electronics_Store_MS.Menu
         {
             Environment.Exit(0);
         }
-        public static void ChooseOneProduct(int choice, bool isContinue)
+        public static void ChooseOneProduct(int choice, bool isContinue, Product.Product product)
         {
             do
             {
@@ -56,10 +56,12 @@ namespace Electronics_Store_MS.Menu
                 switch (choice)
                 {
                     case 1:
-                        ChooseOneFan(choice, isContinue);
+                        ChooseOneFan(choice, isContinue, product);
+                        isContinue = false;
                         break;
                     case 2:
-                        ChooseOneAirConditioner(choice, isContinue);
+                        ChooseOneAirConditioner(choice, isContinue, product);
+                        isContinue = false;
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -70,7 +72,7 @@ namespace Electronics_Store_MS.Menu
             } while (isContinue);
         }
 
-        public static void ChooseOneFan(int choice, bool isContinue)
+        public static void ChooseOneFan(int choice, bool isContinue, Product.Product product)
         {
             do
             {
@@ -82,22 +84,19 @@ namespace Electronics_Store_MS.Menu
                     case 1:
                         Pedestal pedestal = new Pedestal();
                         pedestal.AddToInvoice();
-                        pedestal.ExportInvoice();
+                        product = pedestal;
                         isContinue = false;
-                        Console.ReadKey();
                         break;
                     case 2:
                         Misting misting = new Misting();
                         misting.AddToInvoice();
-                        misting.ExportInvoice();
-                        Console.ReadKey();
+                        product = misting;
                         isContinue = false;
                         break;
                     case 3:
                         Battery battery = new Battery();
                         battery.AddToInvoice();
-                        battery.ExportInvoice();
-                        Console.ReadKey();
+                        product = battery;
                         isContinue = false;
                         break;
                     default:
@@ -109,7 +108,7 @@ namespace Electronics_Store_MS.Menu
             } while (isContinue);
         }
 
-        public static void ChooseOneAirConditioner(int choice, bool isContinue)
+        public static void ChooseOneAirConditioner(int choice, bool isContinue, Product.Product product)
         {
             do
             {
@@ -121,15 +120,13 @@ namespace Electronics_Store_MS.Menu
                     case 1:
                         OneWay one = new OneWay();
                         one.AddToInvoice();
-                        one.ExportInvoice();
+                        product = one;
                         isContinue = false;
-                        Console.ReadKey();
                         break;
                     case 2:
-                        TwoWay misting = new TwoWay();
-                        misting.AddToInvoice();
-                        misting.ExportInvoice();
-                        Console.ReadKey();
+                        TwoWay two = new TwoWay();
+                        two.AddToInvoice();
+                        product = two;
                         isContinue = false;
                         break;
                     default:

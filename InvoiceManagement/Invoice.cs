@@ -11,8 +11,8 @@ namespace Electronics_Store_MS.InvoiceManagement
     public class Invoice
     {
         private string iD;
-        private List<InvoiceDetail> invoiceDetails;
-        private Customer customer;
+        private List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
+        private Customer customer = new Customer();
         private DateTime date;
         private decimal totalCost;
 
@@ -24,7 +24,6 @@ namespace Electronics_Store_MS.InvoiceManagement
 
         public void EnterInformation()
         {
-            customer = new Customer();
             int length = 0;
             UIController.EnterInformation("Nhập Mã hóa đơn: ", ref iD);
             UIController.EnterDate("Nhập Ngày lập hóa đơn: ", ref date);
@@ -32,6 +31,15 @@ namespace Electronics_Store_MS.InvoiceManagement
             customer.GetInformation();
             UIController.EnterNumber("Nhập Số lượng các sản phẩm trong hóa đơn: ", ref length);
             InvoiceDetail.EnterDetailList(ref invoiceDetails, length);
+        }
+
+        public void ExportInformation()
+        {
+            Console.WriteLine("Mã hóa đơn: {0}",ID);
+            Console.WriteLine("Ngày lập hóa đơn: {0}", Date);
+            customer.ExportInformation();
+            InvoiceDetail.ExportDetailList(ref invoiceDetails);
+            Console.ReadKey();
         }
 
         public decimal GetTotalCost()

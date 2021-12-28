@@ -22,6 +22,7 @@ namespace Electronics_Store_MS
                         //Menu.Menu.ChooseOneProduct(choice, isContinue);
                         InvoiceManagement.Invoice invoice = new InvoiceManagement.Invoice();
                         invoice.EnterInformation();
+                        invoice.ExportInformation();
                         break;
                     case 2:
                         break;
