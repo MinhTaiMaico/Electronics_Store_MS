@@ -10,7 +10,7 @@ namespace Electronics_Store_MS.UIController
 
     public class UIController
     {
-        static int limitOfEntries = 5;
+        public static int limitOfEntries = 5;
 
         public static void EnterInformation(string label, ref string information)
         {
@@ -27,7 +27,7 @@ namespace Electronics_Store_MS.UIController
         {
             if (String.IsNullOrWhiteSpace(information.ToString()))
             {
-                ShowAlert("Thông tin này không được bỏ trống. Vui lòng nhập lại.", numberOfEntries, limitOfEntries);
+                ShowAlert("\tThông tin này không được bỏ trống. Vui lòng nhập lại.", numberOfEntries, limitOfEntries);
                 return false;
             }
             else
@@ -55,7 +55,7 @@ namespace Electronics_Store_MS.UIController
 
             if (isChecked != true)
             {
-                ShowAlert("Nhập sai định dạng, phải nhập số tự nhiên.", numberOfEntries, limitOfEntries);
+                ShowAlert("\tNhập sai định dạng, phải nhập số tự nhiên.", numberOfEntries, limitOfEntries);
                 return false;
             }
             else
@@ -83,7 +83,7 @@ namespace Electronics_Store_MS.UIController
             bool isChecked = long.TryParse(information, out value);
             if (isChecked != true)
             {
-                ShowAlert("Nhập sai định dạng, phải nhập số tự nhiên.", numberOfEntries, limitOfEntries);
+                ShowAlert("\tNhập sai định dạng, phải nhập số tự nhiên.", numberOfEntries, limitOfEntries);
                 return false;
             }
             else
@@ -91,7 +91,7 @@ namespace Electronics_Store_MS.UIController
                 if (information.Length == 10 || information.Length == 11) { return true; }
                 else
                 {
-                    ShowAlert("Nhập sai định dạng. SĐT phải có độ dài 10 hoặc 11 kí tự.", numberOfEntries, limitOfEntries);
+                    ShowAlert("\tNhập sai định dạng. SĐT phải có độ dài 10 hoặc 11 kí tự.", numberOfEntries, limitOfEntries);
                     return false;
                 }
             }
@@ -107,7 +107,7 @@ namespace Electronics_Store_MS.UIController
             }
             else
             {
-                BackToMenu("Hết lượt nhập, quay lại trang chủ trong giây lát.", 2000);
+                BackToMenu("\tHết lượt nhập, quay lại trang chủ trong giây lát.", 2000);
             }
         }
 
@@ -137,9 +137,9 @@ namespace Electronics_Store_MS.UIController
             int limitOfEntries = 5;
             for (int i = 0; i < limitOfEntries; i++)
             {
-                EnterNumber($"Thêm {service.AddServiceName()} ? (1.Có - 0.Không)", ref choice);
+                EnterNumber($"\t\t\t\tThêm {service.AddServiceName()} ? (1.Có - 0.Không) ", ref choice);
                 if (choice != 1 && choice != 0)
-                    ShowAlert("Nhập sai định dạng. Chỉ có 2 lựa chọn (1.Có - 0.Không).", i, limitOfEntries);
+                    ShowAlert("\t\t\t\tNhập sai định dạng. Chỉ có 2 lựa chọn (1.Có - 0.Không).", i, limitOfEntries);
                 else
                 {
                     if (choice == 1)
@@ -157,24 +157,25 @@ namespace Electronics_Store_MS.UIController
         {
             int year = 0, month = 0, day = 0;
             Console.WriteLine(label);
-            EnterYear("Nhập Năm: ", ref year);
-            EnterMonth("Nhập Tháng: ", ref month);
+            EnterMonth("\t\tNhập Tháng: ",ref month, ref year);
+
             for (int i = 0; i < limitOfEntries; i++)
-            {
-                Console.WriteLine();
-                Console.Write("Nhập ngày: ");
-                string information = Console.ReadLine();
-                if (NumericCheck(information, i, limitOfEntries, ref day))
                 {
-                    if (IsDay(day, month, year, i, limitOfEntries)) { break; }
+                    Console.WriteLine();
+                    Console.Write("\t\tNhập Ngày: ");
+                    string information = Console.ReadLine();
+                    if (NumericCheck(information, i, limitOfEntries, ref day))
+                    {
+                        if (IsDay(day, month, year, i, limitOfEntries)) { break; }
+                    }
                 }
-            }
 
             dateTime = new DateTime(year, month, day);
         }
 
         public static bool IsDay(int day,int month, int year, int numberOfEntries, int limitOfEntries)
         {
+            DateTime now = DateTime.Now;
             bool isTrue = true;
             if (day < 32 && day > 0)
             {
@@ -182,18 +183,27 @@ namespace Electronics_Store_MS.UIController
                 {
                     if (day > 29)
                     {
-                        ShowAlert("Sai định dạng. Ngày trong tháng 2 của năm nhuận phải từ 1-29", numberOfEntries, limitOfEntries);
+                        ShowAlert("\tSai định dạng. Ngày trong tháng 2 của năm nhuận phải từ 1-29.", numberOfEntries, limitOfEntries);
                         isTrue = false;
                     }
                     else isTrue = true;
                 }
                 else
                 {
-                    if (month == 4 || month == 6 || month == 9 || month == 11)
+                    if (year == now.Year && month == now.Month)
+                    {
+                        if (day > now.Day)
+                        {
+                            ShowAlert("\tSai định dang. Ngày bạn nhập lớn hơn ngày hiện tại.", numberOfEntries, limitOfEntries);
+                            isTrue = false;
+                        }
+                        else isTrue = true;
+                    }
+                    else if (month == 4 || month == 6 || month == 9 || month == 11)
                     {
                         if (day > 30)
                         {
-                            ShowAlert("Sai định dạng. Ngày trong tháng này phải từ 1-30", numberOfEntries, limitOfEntries);
+                            ShowAlert("\tSai định dạng. Ngày trong tháng này phải từ 1-30.", numberOfEntries, limitOfEntries);
                             isTrue = false;
                         }
                         else isTrue = true;
@@ -202,7 +212,7 @@ namespace Electronics_Store_MS.UIController
                     {
                         if (day > 31)
                         {
-                            ShowAlert("Sai định dạng. Ngày trong tháng này phải từ 1-31", numberOfEntries, limitOfEntries);
+                            ShowAlert("\tSai định dạng. Ngày trong tháng này phải từ 1-31.", numberOfEntries, limitOfEntries);
                             isTrue = false;
                         }
                         else isTrue = true;
@@ -211,7 +221,7 @@ namespace Electronics_Store_MS.UIController
                     {
                         if (day > 28)
                         {
-                            ShowAlert("Sai định dạng. Ngày trong tháng này phải từ 1-28", numberOfEntries, limitOfEntries);
+                            ShowAlert("\tSai định dạng. Ngày trong tháng này phải từ 1-28.", numberOfEntries, limitOfEntries);
                             isTrue = false;
                         }
                         else isTrue = true;
@@ -220,15 +230,16 @@ namespace Electronics_Store_MS.UIController
             }
             else
             {
-                ShowAlert("Sai định dạng. Ngày trong tháng phải từ 1 - 31", numberOfEntries, limitOfEntries);
+                ShowAlert("\tSai định dạng. Ngày trong tháng phải từ 1 - 31.", numberOfEntries, limitOfEntries);
                 isTrue = false;
             }
 
             return isTrue;
         }
 
-        public static void EnterMonth(string label, ref int month)
+        public static void EnterMonth(string label, ref int month, ref int year)
         {
+            EnterYear("\t\tNhập Năm: ",ref year);
             string information;
 
             for (int i = 0; i < limitOfEntries; i++)
@@ -238,25 +249,31 @@ namespace Electronics_Store_MS.UIController
                 information = Console.ReadLine();
                 if (NumericCheck(information, i, limitOfEntries, ref month))
                 {
-                    if (IsMonth(month, i, limitOfEntries)) { break; }
+                    if (IsMonth(year, month, i, limitOfEntries)) { break; }
                 }
             }
         }
 
-        public static bool IsMonth(int month, int numberOfEnties, int limitOfEntries)
+        public static bool IsMonth(int year, int month, int numberOfEnties, int limitOfEntries)
         {
+            DateTime now = DateTime.Now;
             bool isTrue;
 
             bool isGreaterThan12 = month > 12;
             bool isSmallerThan0 = month < 0;
             if (isGreaterThan12)
             {
-                ShowAlert("Sai định dạng. Tháng bạn nhập lớn hơn 12 hiện tại.", numberOfEnties, limitOfEntries);
+                ShowAlert("\tSai định dạng. Tháng bạn nhập lớn hơn 12.", numberOfEnties, limitOfEntries);
                 isTrue = false;
             }
             else if (isSmallerThan0)
             {
-                ShowAlert("Sai định dạng. Tháng bạn nhập nhỏ hơn 0.", numberOfEnties, limitOfEntries);
+                ShowAlert("\tSai định dạng. Tháng bạn nhập nhỏ hơn 0.", numberOfEnties, limitOfEntries);
+                isTrue = false;
+            } 
+            else if (year == now.Year && month > now.Month)
+            {
+                ShowAlert("\tSai định dạng. Tháng bạn nhập lớn hơn tháng hiện tại.", numberOfEnties, limitOfEntries);
                 isTrue = false;
             }
             else
@@ -289,18 +306,35 @@ namespace Electronics_Store_MS.UIController
             bool isSmallerThan20 = year < DateTime.Now.AddYears(-20).Year;
             if (isGreaterThanNow)
             {
-                ShowAlert($"Sai định dạng. Năm bạn nhập lớn hơn năm {DateTime.Now.Year}.", numberOfEnties, limitOfEntries);
+                ShowAlert($"\tSai định dạng. Năm bạn nhập lớn hơn năm {DateTime.Now.Year}.", numberOfEnties, limitOfEntries);
                 isTrue = false; 
             }
             else if (isSmallerThan20)
             {
-                ShowAlert("Sai định dạng. Năm bạn nhập vượt quá thời hạn (20 năm trở lại đây).", numberOfEnties, limitOfEntries);
+                ShowAlert("\tSai định dạng. Năm bạn nhập vượt quá thời hạn (20 năm trở lại đây).", numberOfEnties, limitOfEntries);
                 isTrue = false;
             }
             else
                 isTrue = true;
             
             return isTrue;
+        }
+        public static void EnterQuantity(string label,ref int quantity)
+        {
+            int length = 0;
+            for(int i =0; i < limitOfEntries; i++)
+            {
+                EnterNumber(label, ref length);
+                if (length < 0 || length == 0)
+                {
+                    ShowAlert("\tSố lượng phải lớn hơn 0. ", i , limitOfEntries);
+                }
+                else
+                {
+                    quantity = length;
+                    break;
+                }
+            }
         }
     }
 }

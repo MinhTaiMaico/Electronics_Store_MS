@@ -18,18 +18,18 @@ namespace Electronics_Store_MS.Customer
 
         public void GetInformation()
         {
-            UIController.UIController.EnterInformation("Nhập Mã khách hàng: ", ref iD);
-            UIController.UIController.EnterInformation("Nhập Tên khách hàng: ", ref name);
-            UIController.UIController.EnterInformation("Nhập Địa chỉ khách hàng: ", ref address);
-            UIController.UIController.EnterPhoneNumber("Nhập SĐT khách hàng: ", ref phoneNum);
+            UIController.UIController.EnterInformation("\t\tNhập Mã khách hàng: ", ref iD);
+            UIController.UIController.EnterInformation("\t\tNhập Tên khách hàng: ", ref name);
+            UIController.UIController.EnterInformation("\t\tNhập Địa chỉ khách hàng: ", ref address);
+            UIController.UIController.EnterPhoneNumber("\t\tNhập SĐT khách hàng: ", ref phoneNum);
         }
         public void ExportInformation()
         {
-            Console.WriteLine("Thông tin khách hàng: ");
-            Console.WriteLine("\tMã khách hàng     : {0}", ID);
-            Console.WriteLine("\tTên khách hàng    : {0}", Name);
-            Console.WriteLine("\tĐịa chỉ khách hàng: {0}", Address);
-            Console.WriteLine("\tSĐT khách hàng    : {0}", PhoneNum);
+            Console.WriteLine("\n\tThông tin khách hàng: ");
+            Console.WriteLine("\t\tMã khách hàng     : {0}", ID);
+            Console.WriteLine("\t\tTên khách hàng    : {0}", Name);
+            Console.WriteLine("\t\tĐịa chỉ khách hàng: {0}", Address);
+            Console.WriteLine("\t\tSĐT khách hàng    : {0}", PhoneNum);
         }
     }
 }

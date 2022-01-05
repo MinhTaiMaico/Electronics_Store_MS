@@ -16,15 +16,18 @@ namespace Electronics_Store_MS.Product.Fan
         {
             base.AddToInvoice();
             Type = "Máy quạt phun sương";
-            UIController.EnterNumber("Nhập dung tích nước(l): ", ref waterCapacity);
+            UIController.EnterNumber("\t\t\t\tNhập dung tích nước(l): ", ref waterCapacity);
         }
 
         public override void ExportInvoice()
         {
             base.ExportInvoice();
-            Console.WriteLine("\tLoại: {0}", Type);
-            Console.WriteLine("\tDung tích nước: {0}", WaterCapacity);
-            Console.WriteLine("\tGiá tiền: {0}", GetPrice(ref price));
+            Console.WriteLine("\t\tLọai             : {0}", Type);
+            Console.WriteLine("\t\tDung tích nước   : {0}", WaterCapacity);
+            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
+            productDetails += $"\tLọai: {Type}\n" +
+                              $"\tDung tích nước: {WaterCapacity}\n" +
+                              $"\tGiá tiền: {GetPrice(ref price)}";
         }
 
         public override decimal GetPrice(ref decimal price)

@@ -7,7 +7,8 @@ namespace Electronics_Store_MS.InvoiceManagement
 {
     using Electronics_Store_MS.Customer;
     using Electronics_Store_MS.UIController;
-    
+    using System.IO;
+
     public class Invoice
     {
         private string iD;
@@ -25,32 +26,160 @@ namespace Electronics_Store_MS.InvoiceManagement
         public void EnterInformation()
         {
             int length = 0;
-            UIController.EnterInformation("Nhập Mã hóa đơn: ", ref iD);
-            UIController.EnterDate("Nhập Ngày lập hóa đơn: ", ref date);
-            Console.WriteLine("Nhập Thông tin khách hàng:");
+            UIController.EnterInformation("\tNhập Mã hóa đơn: ", ref iD);
+            UIController.EnterDate("\n\tNhập Ngày lập hóa đơn: ", ref date);
+            Console.WriteLine("\n\tNhập Thông tin khách hàng:");
             customer.GetInformation();
-            UIController.EnterNumber("Nhập Số lượng các sản phẩm trong hóa đơn: ", ref length);
+            UIController.EnterQuantity("\tNhập Số lượng các Loại sản phẩm trong hóa đơn: ", ref length);
             InvoiceDetail.EnterDetailList(ref invoiceDetails, length);
+            GetTotalCost(ref totalCost);
         }
 
         public void ExportInformation()
         {
             Console.Clear();
-            Console.WriteLine("THÔNG TIN HÓA ĐƠN");
-            Console.WriteLine("Mã hóa đơn: {0}",ID);
-            Console.WriteLine("Ngày lập hóa đơn: {0}", Date);
+            Console.WriteLine("\tMã hóa đơn         : {0}", ID); 
+            Console.WriteLine("\tNgày lập hóa đơn   : {0}\n", Date.ToShortDateString());
             customer.ExportInformation();
             InvoiceDetail.ExportDetailList(ref invoiceDetails);
-            Console.ReadKey();
+            Console.WriteLine("\tTổng tiền          : {0}.\n.", TotalCost);
         }
 
-        public decimal GetTotalCost()
+        public decimal GetTotalCost(ref Decimal totalCost)
         {
             var costs = from invoiceDetail in invoiceDetails
                         select invoiceDetail.Cost;
             totalCost = costs.Sum();
             
             return totalCost;
+        }
+
+        public static void EnterList(ref List<Invoice> invoices, int length)
+        {
+            for (int i=0; i < length; i++)
+            {
+                Console.WriteLine("\n\tNhập thông tin Hóa đơn thứ {0}:", i + 1);
+                Invoice invoice = new Invoice();
+                invoice.EnterInformation();
+                invoices.Add(invoice);
+            }
+        }
+
+        public static void ExportListToConsole(ref List<Invoice> invoices)
+        {
+            int choice = 0;
+            int length = invoices.Count;
+            Console.WriteLine("\tDanh sách hóa đơn:");
+            for (int i = 0; i < length; i++)
+                Console.WriteLine("\t{0}. Hóa đơn số {0}", i + 1);
+            for (int i = 0; i < UIController.limitOfEntries; i++)
+            {
+                UIController.EnterQuantity("\tBạn muốn xem hóa đơn số:", ref choice);
+                if (choice <= length)
+                {
+                    Console.WriteLine("", choice);
+                    MoveOver($"\t\tTHÔNG TIN HÓA ĐƠN THỨ {choice}\n", ref invoices, choice - 1);
+                    break;
+                }
+                else
+                    UIController.ShowAlert("\tHóa đơn không tồn tại.", i, UIController.limitOfEntries);
+            }
+        }
+        public static void MoveOver(string message, ref List<Invoice> invoices, int index)
+        {
+            Console.WriteLine(message);
+            invoices[index].ExportInformation();
+            int listCount = invoices.Count;
+            bool isChecked = false;
+
+            do
+            {
+                Console.WriteLine("\tSử dụng các phím mũi tên Trái/Phải để di chuyển giữa các hóa đơn.\n\tNhấn Space để trở lại Trang chủ.");
+                var keyPress = Console.ReadKey();
+                switch (keyPress.Key)
+                {
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.DownArrow:
+                        if (index > 0)
+                        {
+                            index--;
+                            invoices[index].ExportInformation();
+                        }
+                        else
+                        {
+                            index = listCount - 1;
+                            invoices[index].ExportInformation();
+                        }
+                        isChecked = true;
+                        break;
+
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.RightArrow:
+                        if (index == listCount - 1)
+                        {
+                            index = 0;
+                            invoices[index].ExportInformation();
+                        }
+                        else
+                        {
+                            index++;
+                            invoices[index].ExportInformation();
+                        }
+                        isChecked = true;
+                        break;
+                    case ConsoleKey.Spacebar:
+                        Menu.Menu.ShowMenu("Trở lại Trang chủ trong giây lát.", 1500);
+                        isChecked = true;
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\tChỉ nhấn các phím Arrow và Space.");
+                        Console.ResetColor();
+                        isChecked = false;
+                        break;
+                } 
+            } while (isChecked);
+        }
+
+        public static void ExportListToFile(ref List<Invoice> invoices)
+        {
+            FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\ListInvoice.txt", FileMode.Create);
+
+            StreamWriter sw = new StreamWriter(fs);
+            int i = 0;
+            foreach (Invoice invoice in invoices)
+            {
+                i++;
+                sw.WriteLine("\t==================================================\n");
+                sw.WriteLine($"\tThông tin hóa đơn thứ {i} : ");
+                sw.WriteLine($"\t Mã hóa đơn : {invoice.ID}");
+                sw.WriteLine($"\t Ngày lập   : {invoice.Date.ToShortDateString()}");
+                sw.WriteLine($"\t Tổng thanh toán   : {invoice.TotalCost}\n");
+                sw.WriteLine("\t--------------------------------------------------");
+                sw.WriteLine("\tThông tin khách hàng :");
+                sw.WriteLine("\tMã khách hàng     : {0}", invoice.Customer.ID);
+                sw.WriteLine("\tTên khách hàng    : {0}", invoice.Customer.Name);
+                sw.WriteLine("\tĐịa chỉ khách hàng: {0}", invoice.Customer.Address);
+                sw.WriteLine("\tSĐT khách hàng    : {0}\n", invoice.Customer.PhoneNum);
+                sw.WriteLine($"\t--------------------------------------------------\n");
+                sw.WriteLine("\tDanh sách các loại SP trong hóa đơn :\n");
+                sw.WriteLine();
+                int invoiceCount = invoice.InvoiceDetails.Count;
+                for (int j = 0; j < invoiceCount; j++)
+                {
+                    sw.WriteLine($"\tSản phẩm thứ {j + 1}:");
+                    sw.WriteLine($"\t{invoice.InvoiceDetails[j].Product.productDetails}");
+                    sw.WriteLine($"\tSố lượng: {invoice.InvoiceDetails[j].Quantity}");
+                    sw.WriteLine($"\tThành tiền: {invoice.InvoiceDetails[j].Cost}");
+                }
+                sw.WriteLine();
+                sw.WriteLine("\t==================================================\n");
+
+            }
+
+
+            sw.Flush();
+            fs.Close();
         }
     }
 }

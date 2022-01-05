@@ -1,42 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Electronics_Store_MS
 {
+    using Electronics_Store_MS.InvoiceManagement;
+    using Electronics_Store_MS.Product.Fan;
+
     class Program
     {
+        public static List<Invoice> invoices = new List<Invoice>();
+
         public static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.Unicode;
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            int choice = 0;
-            bool isContinue = true;
-            Menu.Menu.Show();
-            do
-            {
-                UIController.UIController.EnterNumber("\tLựa chọn của bạn là: ", ref choice);
-
-                switch (choice)
-                {
-                    case 1:
-                        //Menu.Menu.ChooseOneProduct(choice, isContinue);
-                        InvoiceManagement.Invoice invoice = new InvoiceManagement.Invoice();
-                        invoice.EnterInformation();
-                        invoice.ExportInformation();
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        Menu.Menu.CloseApps(choice, isContinue);
-                        break;
-                }
-
-            } while (isContinue);
-            Console.ReadKey();
+            Menu.Menu.Build(ref invoices);
+            
         }
-
-        
     }
 }
