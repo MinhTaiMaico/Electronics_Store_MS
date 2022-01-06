@@ -23,15 +23,15 @@ namespace Electronics_Store_MS.Product
             UIController.EnterInformation("\t\t\t\tNhập mã SP: ", ref iD); 
             UIController.EnterInformation("\t\t\t\tNhập tên SP: ", ref name);
             UIController.EnterInformation("\t\t\t\tNhập tên nhà SX: ", ref provider);
+            productDetails += $"\tMã SP             : {ID}\n" +
+                              $"\t\tTên SP          : {Name}\n" +
+                              $"\t\tThuộc nhà SX    : {Provider}";
         }
         public virtual void ExportInvoice()
         {
             Console.WriteLine("\n\t\tMã SP            : {0}", ID);
             Console.WriteLine("\t\tTên SP           : {0}", Name);
             Console.WriteLine("\t\tThuộc nhà SX     : {0}", Provider);
-            productDetails += $"\tMã SP: {ID}\n" +
-                              $"\tTên SP: {Name}\n" +
-                              $"\tThuộc nhà SX: {Provider}";
         }
         public abstract decimal GetPrice(ref decimal price);
     }

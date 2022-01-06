@@ -25,7 +25,7 @@ namespace Electronics_Store_MS.Customer
         }
         public void ExportInformation()
         {
-            Console.WriteLine("\n\tThông tin khách hàng: ");
+            Console.WriteLine("\n\tThông tin khách hàng: \n");
             Console.WriteLine("\t\tMã khách hàng     : {0}", ID);
             Console.WriteLine("\t\tTên khách hàng    : {0}", Name);
             Console.WriteLine("\t\tĐịa chỉ khách hàng: {0}", Address);

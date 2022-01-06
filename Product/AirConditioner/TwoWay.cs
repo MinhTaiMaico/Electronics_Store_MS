@@ -23,31 +23,29 @@ namespace Electronics_Store_MS.Product.AirConditioner
             UIController.UIController.GetExtraServices(inverter, ref extraServices);
             UIController.UIController.GetExtraServices(antibacterial, ref extraServices);
             UIController.UIController.GetExtraServices(deodorization, ref extraServices);
-
+            string extraServiceName = "";
+            int extraCount = extraServices.Count;
+            for(int i =0;i<extraCount;i++)
+                extraServiceName += $"\t\t{extraServices[i].Name}\n\t";
+            productDetails += $"\n\t\tLọai            : {Type}\n" +
+                              $"\t\tCông nghệ bổ sung: \n\t{extraServiceName}" +
+                              $"\tGiá tiền         : {GetPrice(ref price)}";
         }
 
         public override void ExportInvoice()
         {
-            string extraServiceName = "";
+            int extraCount = extraServices.Count;
             base.ExportInvoice();
             Console.WriteLine("\t\tLoại             : {0}", Type);
             Console.Write("\t\tCông nghệ bổ sung: ");
-            for (int i = 0; i < extraServices.Count; i++)
+            for (int i = 0; i < extraCount; i++)
             {
                 if (i == 0)
-                {
                     Console.WriteLine("{0}", extraServices[i].Name);
-                }
                 else
-                {
                     Console.WriteLine("\t\t\t\t   {0}", extraServices[i].Name);
-                }
-                extraServiceName += $"\t{extraServices[i].Name}\n";
             }
             Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
-            productDetails += $"\tLọai: {Type}\n" +
-                              $"\tCông nghệ bổ sung: \n\t{extraServiceName}\n" +
-                              $"\tGiá tiền: {GetPrice(ref price)}";
         }
 
         public override decimal GetPrice(ref decimal price)

@@ -94,7 +94,7 @@ namespace Electronics_Store_MS.InvoiceManagement
 
             do
             {
-                Console.WriteLine("\tSử dụng các phím mũi tên Trái/Phải để di chuyển giữa các hóa đơn.\n\tNhấn Space để trở lại Trang chủ.");
+                Console.WriteLine("\tSử dụng các phím mũi tên Lên/Xuống, Trái/Phải để di chuyển giữa các hóa đơn.\n\tNhấn Bất kì nút nào để trở lại Trang chủ.");
                 var keyPress = Console.ReadKey();
                 switch (keyPress.Key)
                 {
@@ -127,14 +127,8 @@ namespace Electronics_Store_MS.InvoiceManagement
                         }
                         isChecked = true;
                         break;
-                    case ConsoleKey.Spacebar:
-                        Menu.Menu.ShowMenu("Trở lại Trang chủ trong giây lát.", 1500);
-                        isChecked = true;
-                        break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\tChỉ nhấn các phím Arrow và Space.");
-                        Console.ResetColor();
+                        Menu.Menu.ShowMenu("Quay lại trang chủ trong giây lát. ", 1500);
                         isChecked = false;
                         break;
                 } 
@@ -152,32 +146,27 @@ namespace Electronics_Store_MS.InvoiceManagement
                 i++;
                 sw.WriteLine("\t==================================================\n");
                 sw.WriteLine($"\tThông tin hóa đơn thứ {i} : ");
-                sw.WriteLine($"\t Mã hóa đơn : {invoice.ID}");
-                sw.WriteLine($"\t Ngày lập   : {invoice.Date.ToShortDateString()}");
-                sw.WriteLine($"\t Tổng thanh toán   : {invoice.TotalCost}\n");
+                sw.WriteLine($"\tMã hóa đơn        : {invoice.ID}");
+                sw.WriteLine($"\tNgày lập          : {invoice.Date.ToShortDateString()}");
+                sw.WriteLine($"\tTổng thanh toán   : {invoice.TotalCost}\n");
                 sw.WriteLine("\t--------------------------------------------------");
-                sw.WriteLine("\tThông tin khách hàng :");
-                sw.WriteLine("\tMã khách hàng     : {0}", invoice.Customer.ID);
-                sw.WriteLine("\tTên khách hàng    : {0}", invoice.Customer.Name);
-                sw.WriteLine("\tĐịa chỉ khách hàng: {0}", invoice.Customer.Address);
-                sw.WriteLine("\tSĐT khách hàng    : {0}\n", invoice.Customer.PhoneNum);
+                sw.WriteLine("\tThông tin khách hàng :\n");
+                sw.WriteLine("\tMã khách hàng       : {0}", invoice.Customer.ID);
+                sw.WriteLine("\tTên khách hàng      : {0}", invoice.Customer.Name);
+                sw.WriteLine("\tĐịa chỉ khách hàng  : {0}", invoice.Customer.Address);
+                sw.WriteLine("\tSĐT khách hàng      : {0}\n", invoice.Customer.PhoneNum);
                 sw.WriteLine($"\t--------------------------------------------------\n");
                 sw.WriteLine("\tDanh sách các loại SP trong hóa đơn :\n");
-                sw.WriteLine();
                 int invoiceCount = invoice.InvoiceDetails.Count;
                 for (int j = 0; j < invoiceCount; j++)
                 {
                     sw.WriteLine($"\tSản phẩm thứ {j + 1}:");
                     sw.WriteLine($"\t{invoice.InvoiceDetails[j].Product.productDetails}");
-                    sw.WriteLine($"\tSố lượng: {invoice.InvoiceDetails[j].Quantity}");
-                    sw.WriteLine($"\tThành tiền: {invoice.InvoiceDetails[j].Cost}");
+                    sw.WriteLine($"\t\tSố lượng       : {invoice.InvoiceDetails[j].Quantity}");
+                    sw.WriteLine($"\t\tThành tiền     : {invoice.InvoiceDetails[j].Cost}\n");
                 }
                 sw.WriteLine();
-                sw.WriteLine("\t==================================================\n");
-
             }
-
-
             sw.Flush();
             fs.Close();
         }

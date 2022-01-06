@@ -16,6 +16,9 @@ namespace Electronics_Store_MS.Product.Fan
             base.AddToInvoice();
             Type = "Máy quạt sạc điện";
             UIController.EnterNumber("\t\t\t\tNhập dung lượng pin(mAh): ", ref batteryCapacity);
+            productDetails += $"\n\t\tLọai           : {Type}\n" +
+                              $"\t\tDung lượng pin  : {BatteryCapacity}\n" +
+                              $"\t\tGiá tiền        : {GetPrice(ref price)}";
         }
 
         public override void ExportInvoice()
@@ -24,9 +27,6 @@ namespace Electronics_Store_MS.Product.Fan
             Console.WriteLine("\t\tLọai             : {0}", Type);
             Console.WriteLine("\t\tDung lượng pin   : {0}", BatteryCapacity);
             Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
-            productDetails += $"\tLọai: {Type}\n" +
-                              $"\tDung lượng pin: {BatteryCapacity}\n" +
-                              $"\tGiá tiền: {GetPrice(ref price)}";
         }
 
         public override decimal GetPrice(ref decimal price)
