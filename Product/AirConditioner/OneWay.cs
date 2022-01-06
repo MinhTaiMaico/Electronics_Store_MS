@@ -24,7 +24,7 @@ namespace Electronics_Store_MS.Product.AirConditioner
                 extraServiceName += $"\t\t\t{extraServices[i].Name}\n";
             productDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tCông nghệ bổ sung: \n{extraServiceName}" +
-                              $"\t\tGiá tiền         : {GetPrice(ref price)}";
+                              $"\t\tGiá tiền        : {GetPrice(ref price)}";
         }
 
         public override void ExportInvoice()

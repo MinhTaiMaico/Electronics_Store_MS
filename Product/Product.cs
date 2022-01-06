@@ -23,7 +23,7 @@ namespace Electronics_Store_MS.Product
             UIController.EnterInformation("\t\t\t\tNhập mã SP: ", ref iD); 
             UIController.EnterInformation("\t\t\t\tNhập tên SP: ", ref name);
             UIController.EnterInformation("\t\t\t\tNhập tên nhà SX: ", ref provider);
-            productDetails += $"\tMã SP             : {ID}\n" +
+            productDetails += $"\tMã SP           : {ID}\n" +
                               $"\t\tTên SP          : {Name}\n" +
                               $"\t\tThuộc nhà SX    : {Provider}";
         }

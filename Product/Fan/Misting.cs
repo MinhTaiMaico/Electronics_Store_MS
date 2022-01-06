@@ -16,8 +16,8 @@ namespace Electronics_Store_MS.Product.Fan
         {
             base.AddToInvoice();
             Type = "Máy quạt phun sương";
-            UIController.EnterNumber("\t\t\t\tNhập dung tích nước(l): ", ref waterCapacity);
-            productDetails += $"\n\t\tLọai           : {Type}\n" +
+            UIController.EnterQuantity("\t\t\t\tNhập dung tích nước(l): ", ref waterCapacity);
+            productDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tDung tích nước  : {WaterCapacity}\n" +
                               $"\t\tGiá tiền        : {GetPrice(ref price)}";
         }

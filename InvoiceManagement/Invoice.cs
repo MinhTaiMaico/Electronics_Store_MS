@@ -162,8 +162,8 @@ namespace Electronics_Store_MS.InvoiceManagement
                 {
                     sw.WriteLine($"\tSản phẩm thứ {j + 1}:");
                     sw.WriteLine($"\t{invoice.InvoiceDetails[j].Product.productDetails}");
-                    sw.WriteLine($"\t\tSố lượng       : {invoice.InvoiceDetails[j].Quantity}");
-                    sw.WriteLine($"\t\tThành tiền     : {invoice.InvoiceDetails[j].Cost}\n");
+                    sw.WriteLine($"\t\tSố lượng        : {invoice.InvoiceDetails[j].Quantity}");
+                    sw.WriteLine($"\t\tThành tiền      : {invoice.InvoiceDetails[j].Cost}\n");
                 }
                 sw.WriteLine();
             }

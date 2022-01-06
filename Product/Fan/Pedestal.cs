@@ -10,7 +10,7 @@ namespace Electronics_Store_MS.Product.Fan
         {
             base.AddToInvoice();
             Type = "Máy quạt đứng";
-            productDetails += $"\n\t\tLọai           : {Type}\n" +
+            productDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tGiá tiền        : {GetPrice(ref price)}";
         }
 

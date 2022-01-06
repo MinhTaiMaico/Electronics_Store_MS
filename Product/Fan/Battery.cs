@@ -15,8 +15,8 @@ namespace Electronics_Store_MS.Product.Fan
         {
             base.AddToInvoice();
             Type = "Máy quạt sạc điện";
-            UIController.EnterNumber("\t\t\t\tNhập dung lượng pin(mAh): ", ref batteryCapacity);
-            productDetails += $"\n\t\tLọai           : {Type}\n" +
+            UIController.EnterQuantity("\t\t\t\tNhập dung lượng pin(mAh): ", ref batteryCapacity);
+            productDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tDung lượng pin  : {BatteryCapacity}\n" +
                               $"\t\tGiá tiền        : {GetPrice(ref price)}";
         }
