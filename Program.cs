@@ -8,7 +8,7 @@ namespace Electronics_Store_MS
 
     class Program
     {
-        public static List<Invoice> invoices = new List<Invoice>();
+        static List<Invoice> invoices = new List<Invoice>();
 
         public static void Main(string[] args)
         {

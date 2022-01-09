@@ -91,8 +91,7 @@ namespace Electronics_Store_MS.Menu
         {
             do
             {
-                Console.WriteLine("\n\t\t\tSản phẩm bao gồm: 1.Máy quạt - 2.Điều hòa");
-                UIController.UIController.EnterNumber("\t\t\tBạn chọn SP số: ", ref choice);
+                UIController.UIController.EnterNumber("\t\t\tChọn Sản phẩm (1.Máy quạt - 2.Điều hòa): ", ref choice);
 
                 switch (choice)
                 {
@@ -117,8 +116,7 @@ namespace Electronics_Store_MS.Menu
         {
             do
             {
-                Console.WriteLine("\n\t\t\t\tChọn loại quạt: 1.Quạt đứng - 2.Quạt phun sương - 3.Quạt sạc điện");
-                UIController.UIController.EnterNumber("\t\t\t\tBạn chọn loại số: ", ref choice);
+                UIController.UIController.EnterNumber("\t\t\t\tChọn loại quạt (1.Quạt đứng - 2.Quạt phun sương - 3.Quạt sạc điện): ", ref choice);
 
                 switch (choice)
                 {
@@ -160,8 +158,7 @@ namespace Electronics_Store_MS.Menu
         {
             do
             {
-                Console.WriteLine("\n\t\t\t\tChọn loại điều hòa: 1.Một chiều - 2.Hai chiều");
-                UIController.UIController.EnterNumber("\t\t\t\tBạn chọn loại số: ", ref choice);
+                UIController.UIController.EnterNumber("\t\t\t\tChọn loại điều hòa (1.Một chiều - 2.Hai chiều): ", ref choice);
 
                 switch (choice)
                 {
