@@ -9,26 +9,26 @@ namespace Electronics_Store_MS.InvoiceManagement
 
     public class InvoiceDetail
     {
-        private int quantity;
-        private decimal cost;
-        private Product product;
+        private int _quantity;
+        private decimal _cost;
+        private Product _product;
 
-        public int Quantity { get => quantity; }
-        public decimal Cost { get => cost; }
-        public Product Product { get => product; }
+        public int Quantity { get => _quantity; }
+        public decimal Cost { get => _cost; }
+        public Product Product { get => _product; }
 
         public void EnterInformation()
         {
             int choice = 0;
             bool isContinue = true;
-            Menu.Menu.ChooseOneProduct(choice, isContinue, ref product);
-            UIController.EnterQuantity("\t\t\tNhập Số lượng: ", ref quantity);
-            GetCost(ref cost);
+            Menu.Menu.ChooseOneProduct(choice, isContinue, ref _product);
+            UIController.EnterQuantity("\t\t\tNhập Số lượng: ", ref _quantity);
+            GetCost(ref _cost);
         }
 
         public void ExportInformation()
         {
-            product.ExportInvoice();
+            _product.ExportInvoice();
             Console.WriteLine("\t\tSố lượng         : {0}", Quantity);
             Console.WriteLine("\t\tThành tiền       : {0}", Cost);
         }   
@@ -57,7 +57,7 @@ namespace Electronics_Store_MS.InvoiceManagement
 
         public decimal GetCost(ref Decimal cost)
         {
-            cost= quantity * product.Price;
+            cost= _quantity * _product.Price;
             return cost;
         }
     }

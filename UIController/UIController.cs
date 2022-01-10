@@ -260,7 +260,7 @@ namespace Electronics_Store_MS.UIController
             bool isTrue;
 
             bool isGreaterThan12 = month > 12;
-            bool isSmallerThan0 = month < 0;
+            bool isSmallerThan0 = month <= 0;
             if (isGreaterThan12)
             {
                 ShowAlert("\tSai định dạng. Tháng bạn nhập lớn hơn 12.", numberOfEnties, limitOfEntries);
@@ -268,7 +268,7 @@ namespace Electronics_Store_MS.UIController
             }
             else if (isSmallerThan0)
             {
-                ShowAlert("\tSai định dạng. Tháng bạn nhập nhỏ hơn 0.", numberOfEnties, limitOfEntries);
+                ShowAlert("\tSai định dạng. Tháng bạn nhập nhỏ hơn hoặc bằng 0.", numberOfEnties, limitOfEntries);
                 isTrue = false;
             } 
             else if (year == now.Year && month > now.Month)

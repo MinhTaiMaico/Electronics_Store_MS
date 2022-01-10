@@ -27,9 +27,9 @@ namespace Electronics_Store_MS.Product.AirConditioner
             int extraCount = extraServices.Count;
             for(int i =0;i<extraCount;i++)
                 extraServiceName += $"\t\t{extraServices[i].Name}\n\t";
-            productDetails += $"\n\t\tLọai            : {Type}\n" +
+            ProductDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tCông nghệ bổ sung: \n\t{extraServiceName}" +
-                              $"\tGiá tiền        : {GetPrice(ref price)}";
+                              $"\tGiá tiền        : {GetPrice(ref _price)}";
         }
 
         public override void ExportInvoice()
@@ -45,7 +45,7 @@ namespace Electronics_Store_MS.Product.AirConditioner
                 else
                     Console.WriteLine("\t\t\t\t   {0}", extraServices[i].Name);
             }
-            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
+            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref _price));
         }
 
         public override decimal GetPrice(ref decimal price)

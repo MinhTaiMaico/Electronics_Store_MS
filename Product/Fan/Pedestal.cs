@@ -10,15 +10,15 @@ namespace Electronics_Store_MS.Product.Fan
         {
             base.AddToInvoice();
             Type = "Máy quạt đứng";
-            productDetails += $"\n\t\tLọai            : {Type}\n" +
-                              $"\t\tGiá tiền        : {GetPrice(ref price)}";
+            ProductDetails += $"\n\t\tLọai            : {Type}\n" +
+                              $"\t\tGiá tiền        : {GetPrice(ref _price)}";
         }
 
         public override void ExportInvoice()
         {
             base.ExportInvoice();
             Console.WriteLine("\t\tLọai             : {0}", Type);
-            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
+            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref _price));
         }
 
         public override decimal GetPrice(ref decimal price)

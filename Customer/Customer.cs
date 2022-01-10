@@ -6,22 +6,22 @@ namespace Electronics_Store_MS.Customer
 {
     public class Customer
     {
-        private string iD;
-        private string name;
-        private string address;
-        private string phoneNum;
+        private string _iD;
+        private string _name;
+        private string _address;
+        private string _phoneNum;
 
-        public string ID { get => iD; }
-        public string Name { get => name; }
-        public string Address { get => address; }
-        public string PhoneNum { get => phoneNum; }
+        public string ID { get => _iD; }
+        public string Name { get => _name; }
+        public string Address { get => _address; }
+        public string PhoneNum { get => _phoneNum; }
 
         public void GetInformation()
         {
-            UIController.UIController.EnterInformation("\t\tNhập Mã khách hàng: ", ref iD);
-            UIController.UIController.EnterInformation("\t\tNhập Tên khách hàng: ", ref name);
-            UIController.UIController.EnterInformation("\t\tNhập Địa chỉ khách hàng: ", ref address);
-            UIController.UIController.EnterPhoneNumber("\t\tNhập SĐT khách hàng: ", ref phoneNum);
+            UIController.UIController.EnterInformation("\t\tNhập Mã khách hàng: ", ref _iD);
+            UIController.UIController.EnterInformation("\t\tNhập Tên khách hàng: ", ref _name);
+            UIController.UIController.EnterInformation("\t\tNhập Địa chỉ khách hàng: ", ref _address);
+            UIController.UIController.EnterPhoneNumber("\t\tNhập SĐT khách hàng: ", ref _phoneNum);
         }
         public void ExportInformation()
         {

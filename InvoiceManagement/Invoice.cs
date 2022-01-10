@@ -11,28 +11,28 @@ namespace Electronics_Store_MS.InvoiceManagement
 
     public class Invoice
     {
-        private string iD;
-        private List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
-        private Customer customer = new Customer();
-        private DateTime date;
-        private decimal totalCost;
+        private string _iD;
+        private List<InvoiceDetail> _invoiceDetails = new List<InvoiceDetail>();
+        private Customer _customer = new Customer();
+        private DateTime _date;
+        private decimal _totalCost;
 
-        public string ID { get => iD; }
-        public List<InvoiceDetail> InvoiceDetails { get => invoiceDetails; }
-        public Customer Customer { get => customer; }
-        public DateTime Date { get => date; }
-        public decimal TotalCost { get => totalCost; }
+        public string ID { get => _iD; }
+        public List<InvoiceDetail> InvoiceDetails { get => _invoiceDetails; }
+        public Customer Customer { get => _customer; }
+        public DateTime Date { get => _date; }
+        public decimal TotalCost { get => _totalCost; }
 
         public void EnterInformation()
         {
             int length = 0;
-            UIController.EnterInformation("\tNhập Mã hóa đơn: ", ref iD);
-            UIController.EnterDate("\n\tNhập Ngày lập hóa đơn: ", ref date);
+            UIController.EnterInformation("\tNhập Mã hóa đơn: ", ref _iD);
+            UIController.EnterDate("\n\tNhập Ngày lập hóa đơn: ", ref _date);
             Console.WriteLine("\n\tNhập Thông tin khách hàng:");
-            customer.GetInformation();
+            _customer.GetInformation();
             UIController.EnterQuantity("\tNhập Số lượng các Loại sản phẩm trong hóa đơn: ", ref length);
-            InvoiceDetail.EnterDetailList(ref invoiceDetails, length);
-            GetTotalCost(ref totalCost);
+            InvoiceDetail.EnterDetailList(ref _invoiceDetails, length);
+            GetTotalCost(ref _totalCost);
         }
 
         public void ExportInformation()
@@ -40,14 +40,14 @@ namespace Electronics_Store_MS.InvoiceManagement
             Console.Clear();
             Console.WriteLine("\tMã hóa đơn         : {0}", ID); 
             Console.WriteLine("\tNgày lập hóa đơn   : {0}\n", Date.ToShortDateString());
-            customer.ExportInformation();
-            InvoiceDetail.ExportDetailList(ref invoiceDetails);
+            _customer.ExportInformation();
+            InvoiceDetail.ExportDetailList(ref _invoiceDetails);
             Console.WriteLine("\tTổng tiền          : {0}.\n.", TotalCost);
         }
 
         public decimal GetTotalCost(ref Decimal totalCost)
         {
-            var costs = from invoiceDetail in invoiceDetails
+            var costs = from invoiceDetail in _invoiceDetails
                         select invoiceDetail.Cost;
             totalCost = costs.Sum();
             
@@ -161,7 +161,7 @@ namespace Electronics_Store_MS.InvoiceManagement
                 for (int j = 0; j < invoiceCount; j++)
                 {
                     sw.WriteLine($"\tSản phẩm thứ {j + 1}:");
-                    sw.WriteLine($"\t{invoice.InvoiceDetails[j].Product.productDetails}");
+                    sw.WriteLine($"\t{invoice.InvoiceDetails[j].Product.ProductDetails}");
                     sw.WriteLine($"\t\tSố lượng        : {invoice.InvoiceDetails[j].Quantity}");
                     sw.WriteLine($"\t\tThành tiền      : {invoice.InvoiceDetails[j].Cost}\n");
                 }

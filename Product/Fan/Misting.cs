@@ -8,18 +8,18 @@ namespace Electronics_Store_MS.Product.Fan
 
     class Misting : Fan
     {
-        private int waterCapacity;
+        private int _waterCapacity;
 
-        public int WaterCapacity { get => waterCapacity; set => waterCapacity = value; }
+        public int WaterCapacity { get => _waterCapacity; set => _waterCapacity = value; }
 
         public override void AddToInvoice()
         {
             base.AddToInvoice();
             Type = "Máy quạt phun sương";
-            UIController.EnterQuantity("\t\t\t\tNhập dung tích nước(l): ", ref waterCapacity);
-            productDetails += $"\n\t\tLọai            : {Type}\n" +
+            UIController.EnterQuantity("\t\t\t\tNhập dung tích nước(l): ", ref _waterCapacity);
+            ProductDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tDung tích nước  : {WaterCapacity}\n" +
-                              $"\t\tGiá tiền        : {GetPrice(ref price)}";
+                              $"\t\tGiá tiền        : {GetPrice(ref _price)}";
         }
 
         public override void ExportInvoice()
@@ -27,7 +27,7 @@ namespace Electronics_Store_MS.Product.Fan
             base.ExportInvoice();
             Console.WriteLine("\t\tLọai             : {0}", Type);
             Console.WriteLine("\t\tDung tích nước   : {0}", WaterCapacity);
-            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
+            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref _price));
         }
 
         public override decimal GetPrice(ref decimal price)

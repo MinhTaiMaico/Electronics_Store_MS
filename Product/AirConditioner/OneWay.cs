@@ -7,9 +7,9 @@ namespace Electronics_Store_MS.Product.AirConditioner
     using Electronics_Store_MS.Service;
     class OneWay : AirConditioner
     {
-        private int initalPrice = 1000;
+        private int _initalPrice = 1000;
 
-        protected int InitalPrice { get => initalPrice; }
+        protected int InitalPrice { get => _initalPrice; }
 
 
         public override void AddToInvoice()
@@ -22,9 +22,9 @@ namespace Electronics_Store_MS.Product.AirConditioner
             int extraCount = extraServices.Count;
             for (int i = 0; i < extraCount; i++)
                 extraServiceName += $"\t\t\t{extraServices[i].Name}\n";
-            productDetails += $"\n\t\tLọai            : {Type}\n" +
+            ProductDetails += $"\n\t\tLọai            : {Type}\n" +
                               $"\t\tCông nghệ bổ sung: \n{extraServiceName}" +
-                              $"\t\tGiá tiền        : {GetPrice(ref price)}";
+                              $"\t\tGiá tiền        : {GetPrice(ref _price)}";
         }
 
         public override void ExportInvoice()
@@ -37,14 +37,14 @@ namespace Electronics_Store_MS.Product.AirConditioner
             {
                 Console.WriteLine("{0}", extraServices[i].Name);
             }
-            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref price));
+            Console.WriteLine("\t\tGiá tiền         : {0}", GetPrice(ref _price));
         }
 
         public override decimal GetPrice(ref decimal price)
         {
             Service service = new InverterTech();
             int fee = service.Fee;
-            price = initalPrice + extraServices.Count * fee;
+            price = _initalPrice + extraServices.Count * fee;
             return price;
         }
     }

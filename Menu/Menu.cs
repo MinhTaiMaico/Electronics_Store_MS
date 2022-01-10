@@ -44,7 +44,7 @@ namespace Electronics_Store_MS.Menu
                         else
                         {
                             Invoice.ExportListToFile(ref invoices);
-                            ShowMenu("\tĐã xuất danh sách hóa đơn (ListInvoice.txt) ra Desktop", 1000);
+                            ShowMenu("\tĐã xuất danh sách hóa đơn (ListInvoice.txt) ra Desktop", 3000);
                         }
                         break;
                     case 4:
@@ -61,10 +61,9 @@ namespace Electronics_Store_MS.Menu
         public static void CloseApps(int choice, bool isContinue)
         {
             Console.WriteLine("\tBạn có thực sự muốn thoát? \n\t 1- Có\n\t 0- Không");
-            UIController.UIController.EnterNumber("\tLựa chọn của bạn là: ", ref choice);
-
             do
             {
+                UIController.UIController.EnterNumber("\tLựa chọn của bạn là: ", ref choice);
                 switch (choice)
                 {
                     case 1:

@@ -8,15 +8,14 @@ namespace Electronics_Store_MS
 
     class Program
     {
-        static List<Invoice> invoices = new List<Invoice>();
+        private static List<Invoice> _invoices = new List<Invoice>();
 
         public static void Main(string[] args)
         {
             Console.InputEncoding = System.Text.Encoding.Unicode;
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            Menu.Menu.Build(ref invoices);
-            
+            Menu.Menu.Build(ref _invoices);
         }
     }
 }
